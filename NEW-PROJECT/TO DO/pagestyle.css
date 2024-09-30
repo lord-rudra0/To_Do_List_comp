@@ -1,0 +1,176 @@
+.navbar {
+    background-color: #6373fc50;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    font-size: xx-large;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.navbar:hover {
+    background-color: #e9ecef;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#task {
+    color: #333;
+    margin: auto;
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
+    border-color: #202ae3;
+    border-width: 3px;
+    /* display: flex; */
+    font-size: x-large;
+    margin: 20px;
+    height: 120px;
+    /* line-height: normal; */
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    /* margin-left: 150px; */
+
+}
+
+#task:hover {
+    background-color: #e9ecef;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+.btnline {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    margin-left: 170px;
+}
+
+#add {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #202ae3;
+    border-width: 2px;
+    font-size: large;
+    margin: 10px;
+    margin-left: 50px;
+}
+
+#add:hover {
+    background-color: #e9ecef;
+    color: black;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#delete {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #202ae3;
+    border-width: 2px;
+    font-size: large;
+    margin: 10px;
+}
+
+#delete:hover {
+    background-color: #252a2f;
+    color: rgb(232, 31, 31);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#mark {
+    background-color: #f0ad4e;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #202ae3;
+    border-width: 2px;
+    font-size: large;
+    margin: 10px;
+}
+
+#mark:hover {
+    background-color: #e3433d;
+    color: black;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.input-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tasklist {
+    display: flex;               
+    justify-content: space-between; 
+    gap: 20px;                   
+    padding: 20px;
+    margin: 10px;
+  }
+  .tasklist:hover {
+    background-color: #e9ecef;
+    box-shadow: 0px 8px 16px rgba(16, 4, 4, 0.2);
+  }
+  
+  #newtask, #endlist {
+    flex: 1;                     
+    border: 1px solid #d03b3b;       
+    padding: 10px;
+  }
+
+  
+  h2 {
+    text-align: center;           
+  }
+  #clearall{
+    background-color: rgb(237, 57, 30);
+    color: white;
+  }
+  #clearall:hover{
+    background-color: #252a2f;
+    color: #d03b3b;
+  }
+
+  #list1, #list2
+  {
+    box-sizing: border-box;
+    border-radius: 10px;
+    border-color: #202ae3;
+    border-width: 2px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  } .task-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    background-color: #f9f9f9;
+}
+.completed {
+    text-decoration: line-through;
+}
+.task-buttons {
+    display: flex;
+    gap: 10px;
+}
+.high-priority {
+    color: red;
+}
+.medium-priority {
+    color: orange;
+}
+.low-priority {
+    color: green;
+}

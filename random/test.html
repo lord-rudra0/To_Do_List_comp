@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembler</title>
+    <link rel="stylesheet" href="STL1.css">
+    <style>
+        #pass1, #optab {
+            color: #333;
+            width: 100%; /* Full width for both text areas */
+            padding: 20px; /* Adjusted for better spacing */
+            font-size: 20px; /* Font size */
+            border-radius: 10px;
+            border: 2px solid #5daaf8; /* Border styling */
+            box-sizing: border-box; /* Include padding in width */
+            margin: 0; /* Remove margins to align correctly */
+        }
+        
+        .fulline {
+            display: flex; /* Use flexbox to align items */
+            justify-content: space-between; /* Space between the two text areas */
+        }
+        
+        .text1, .textt {
+            flex: 1; /* Allow both divs to take equal space */
+            margin-right: 10px; /* Space between text areas */
+        }
+        
+        .textt {
+            margin-right: 0; /* Remove margin from the last div */
+        }
+        
+        .text1 textarea, .textt textarea {
+            height: 200px; /* Set a fixed height for text areas */
+            resize: none; /* Prevent resizing */
+        }
+        
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-center container">
+            <h1>GUI OF PASS1 AND PASS2 ASSEMBLER</h1>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>TWO PASS ASSEMBLER</h2>
+        <label for="pass1">ENTER ASSEMBLY CODE</label><br><br>
+        
+        <div class="fulline">
+            <div class="text1">
+                <textarea id="pass1" placeholder="Enter your assembly code here......."></textarea>
+            </div>
+            <div class="textt">
+                <textarea id="optab" readonly placeholder="Output will be displayed here..."></textarea>
+            </div>
+        </div>
+        
+        <button id="btnp1">PASSONE</button>
+        <button id="btnp2">PASSTWO</button>
+        
+        <h3>OUTPUT FOR PASS 1</h3>
+        <textarea readonly id="output1" placeholder="You will get output for pass 1 here"></textarea>
+        
+        <h3>OUTPUT FOR PASS 2</h3>
+        <textarea readonly id="output2" placeholder="You will get output for pass 2 here"></textarea>
+    </div>
+</body>
+
+</html>

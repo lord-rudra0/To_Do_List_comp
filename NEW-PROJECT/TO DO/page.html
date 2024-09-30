@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="pagestyle.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar">
+            My To-Do List
+        </nav>
+    </div>
+    <div class="container">
+        <div class="input-section">
+            <textarea id="task" placeholder="Enter a task..."></textarea>
+            <button onclick="addtask()" id="add">Add Task</button>
+        </div>
+        <div class="container" class="btnline">
+
+            <!-- <button id="mark">Mark Complete</button> -->
+            <!-- <button id="delete"> Delete Task </button> -->
+            <!-- <button id="update">Edit</button> -->
+        </div>
+    </div>
+
+    <div class="tasklist container">
+        <div id="newtask">
+            <h2>New Task List</h2> 
+           <div id="usernewtask">
+            <!-- new task  -->
+           </div>
+        </div>
+
+        <div id="endlist">
+            <h2>Completed Task List</h2> <!-- Completed tasks will be added here dynamically -->
+           <div id="userendtask">
+            <!-- completed task  -->
+           </div>
+            <button onclick="clearall()" id="clearall">Clear All</button>
+        </div>
+    </div>
+
+    <!-- <div class="container control-buttons"> -->
+
+
+
+    </div>
+    <!-- <table>
+        <tr>
+            <th id="com">
+                <h1>Completed task</h1>
+                <ol>
+                    <li></li>
+                </ol>
+            </th>
+            <th id="nwt">
+                <h1>New task</h1>
+                <ol>
+                    <li></li>
+                </ol>
+            </th>
+        </tr>
+    </table> -->
+    <script>
+        const taskInput = document.getElementById("task");
+        const addTaskButton = document.getElementById("add");
+        const taskList = document.getElementById("tasklist");
+        const newtask = document.getElementById("newtask");
+        const markas = document.getElementById("mark");
+        const deleteTaskButton = document.getElementById("delete");
+        const clearTasksButton = document.getElementById("clear");
+        const clearall = document.getElementById("clearall");
+        const usernewtask = document.getElementById("usernewtask");
+        const userendtask = document.getElementById("userendtask");
+        let totaltask = localStorage.getItem("tasks");
+
+        if (totaltask === null) {
+            totaltask = "";
+        }
+        
+        clearall.onclick = function () {
+            localStorage.clear();
+            userendtask.textContent = "";
+            usernewtask.textContent = "";
+        };
+
+
+        window.onload = function () {
+            if (localStorage.getItem("tasks") !== null) {
+                taskList.innerHTML = localStorage.getItem("tasks");
+            }
+        };
+
+        function addtask() {
+            const task = taskInput.value;
+            if (task === "") {
+                alert("Please enter a task!");
+                return;
+            }
+            const newTask = document.createElement("li");
+            newTask.innerText = task;
+            newTask.onclick = function () {
+                newTask.style.textDecoration = "line-through";
+                newtask.appendChild(newTask);
+            };
+            newtask.appendChild(newTask);
+            taskInput.value = "";
+            localStorage.setItem("tasks", newtask.textContent);
+
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Include Chart.js -->
+</head>
+<body>
+    <h2>Graph Example</h2>
+    <!-- Step 2: Create a canvas element where the graph will be rendered -->
+    <canvas id="myChart" width="400" height="200"></canvas>
+
+    <script>
+        // Step 3: Create a graph using Chart.js
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'doughnut', // Change this to 'line', 'pie', 'doughnut', etc. for different chart types
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange','Black'], // X-axis labels
+                datasets: [{
+                    label: 'Votes',
+                    data: [12, 19, 3, 5, 2, 3,9], // Y-axis data
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(0, 0, 0, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 2 // Border width of the bars/lines
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Start the Y-axis at 0
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

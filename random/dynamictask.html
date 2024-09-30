@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic To-Do List</title>
+    <style>
+        .task-box {
+            display: flex;
+            justify-content: space-between;
+            background-color: #f2f2f2;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            box-shadow: 0 8px px rgba(253, 34, 34, 0.1);
+        }
+
+        .task-buttons button {
+            margin-left: 5px;
+            background-color: chartreuse;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dynamic To-Do List</h1>
+    <textarea id="task" placeholder="Enter a task..."></textarea>
+    <button id="add" onclick="addTask()">Add Task</button>
+
+    <div id="taskList">
+        <!-- Dynamically added tasks will appear here -->
+    </div>
+
+    <script>
+        let taskIdCounter = 0;
+
+        // Function to add a task dynamically
+        function addTask() {
+            const taskInput = document.getElementById("task").value.trim();
+
+            if (taskInput === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            // Increment task ID
+            taskIdCounter++;
+
+            // Create task box (container for the task)
+            const taskBox = document.createElement("div");
+            taskBox.className = "tas k-box";
+            taskBox.id = `task-${taskIdCounter}`;
+
+            // Add the task text inside the task box
+            const taskText = document.createElement("span");
+            taskText.innerText = taskInput;
+
+            // Create buttons for editing and deleting tasks
+            const taskButtons = document.createElement("div");
+            taskButtons.className = "task-buttons";
+
+            const editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            editButton.onclick = () => editTask(taskBox.id);
+
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+            deleteButton.onclick = () => deleteTask(taskBox.id);
+
+            // Add buttons to the task box
+            taskButtons.appendChild(editButton);
+            taskButtons.appendChild(deleteButton);
+
+            taskBox.appendChild(taskText);
+            taskBox.appendChild(taskButtons);
+
+            // Append task box to the task list
+            document.getElementById("taskList").appendChild(taskBox);
+
+            // Clear the input field
+            document.getElementById("task").value = "";
+        }
+
+        // Function to edit an existing task
+        function editTask(taskId) {
+            const taskBox = document.getElementById(taskId);
+            const newTaskText = prompt("Edit Task:", taskBox.querySelector("span").innerText);
+            if (newTaskText) {
+                taskBox.querySelector("span").innerText = newTaskText;
+            }
+        }
+
+        // Function to delete a task
+        function deleteTask(taskId) {
+            document.getElementById(taskId).remove();
+        }
+    </script>
+</body>
+
+</html>

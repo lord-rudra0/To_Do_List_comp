@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="quote">"The only limit to our realization of tomorrow is our doubts of today." – Franklin D. Roosevelt</p>
+
+<!-- Share Buttons -->
+<div>
+    <button onclick="shareOnTwitter()">Share on Twitter</button>
+    <button onclick="shareOnFacebook()">Share on Facebook</button>
+    <button onclick="shareOnLinkedIn()">Share on LinkedIn</button>
+</div>
+<script>
+    function getQuoteText() {
+        return document.getElementById("quote").innerText;
+    }
+    
+    function shareOnTwitter() {
+        var textToShare = encodeURIComponent(getQuoteText());
+        var twitterUrl = `https://twitter.com/intent/tweet?text=${textToShare}`;
+        window.open(twitterUrl, "_blank");
+    }
+    
+    function shareOnFacebook() {
+        var textToShare = encodeURIComponent(getQuoteText());
+        var facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${textToShare}`;
+        window.open(facebookUrl, "_blank");
+    }
+    
+    function shareOnLinkedIn() {
+        var textToShare = encodeURIComponent(getQuoteText());
+        var linkedInUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${textToShare}`;
+        window.open(linkedInUrl, "_blank");
+    }
+    
+</script>
+</body>
+</html>

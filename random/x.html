@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CircularHub - Online Marketplace & Dashboard</title>
+    
+    <style>
+        /* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eef1f5;
+    color: #333;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Navigation Bar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #4CAF50;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .navbar h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .nav-link {
+    color: white;
+    margin-left: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: #333;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 10px;
+    top: 50px;
+  }
+  
+  .dropdown-content a {
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .user-menu:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Hero Section */
+  .hero {
+    background-image: url('https://static.mygov.in/media/blog/2019/09/Image-3.jpeg'); /* Background Image URL */
+    background-size: cover;
+    background-position: center;
+    padding: 50px 20px; /* Adjust the padding to make the background image height smaller */
+    color: white;
+    max-height: 300px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto;
+    z-index: 1;
+    position: relative;
+  }
+  
+  /* Marketplace Section */
+  .marketplace {
+    padding: 40px 20px;
+    background-color: #fff;
+  }
+  
+  .marketplace h2 {
+    color: #4CAF50;
+    margin-bottom: 30px;
+  }
+  
+  .marketplace .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .marketplace .item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .item-details {
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  
+  .item-details h3 {
+    margin: 0;
+  }
+  
+  .item button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .item button:hover {
+    background-color: #388E3C;
+  }
+  
+  /* Dashboard Section */
+  .dashboard {
+    padding: 40px 20px;
+    background-color: #f1f2f6;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card img {
+    width: 100px;
+    margin-bottom: 20px;
+  }
+  
+  .card h3 {
+    margin: 0 0 10px;
+    color: #4CAF50;
+  }
+  
+  .card p {
+    margin: 5px 0;
+  }
+  
+  /* Community Reporting Section */
+  .community-reporting {
+    padding: 40px 20px;
+    background-color: #fafafa;
+  }
+  
+  .community-reporting h2 {
+    margin-bottom: 30px;
+    color: #4CAF50;
+  }
+  
+  #report-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #report-form label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+  }
+  
+  #report-form input, #report-form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  #report-form button {
+    padding: 15px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #report-form button:hover {
+    background-color: #388E3C;
+  }
+  
+  /* Hidden Class */
+  .hidden {
+    display: none;
+  }
+  
+  /* Show Class */
+  .show {
+    display: block;
+  }
+  .waste-diverted {
+    margin: 10px;
+  }
+  
+  #wasteInput {
+    padding: 5px;
+    width: 200px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="nav-link">Cart</a>
+        </div>
+        <div class="nav-center">
+            <h1>CIRCULARHUB</h1>
+        </div>
+        <div class="nav-right user-menu">
+            <a href="#" id="user-menu-link" class="nav-link">User</a>
+            <div class="dropdown-content" id="user-dropdown">
+                <a href="#" data-section="admin">Admin</a>
+                <a href="#" data-section="community">Community</a>
+                <a href="#" data-section="dashboard">Dashboard</a>
+                <a href="#" data-section="account">Account</a>
+                <a href="#" data-section="setting">Setting</a>
+
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <h2>Transforming Waste into Valuable Resources</h2>
+        <p>CircularHub connects people to recycle, repurpose, or donate their waste materials, supporting the circular
+            economy for a sustainable future.</p>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section class="marketplace container" id="marketplace-section">
+        <div id="marketplace-content">
+            <h2 id="marketplace-title">Marketplace</h2>
+            <div class="item">
+                <img src="https://www.recyclingdepotadelaide.com.au/images/recycling/scrap-metal-recycling-process.jpg"
+                    alt="Scrap Metal">
+                <div class="item-details">
+                    <h3>Scrap Metal</h3>
+                    <p>Available for recycling or repurposing.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+
+            <div class="item">
+                <img src="https://erikchristianjohnson.com/wp-content/uploads/2023/07/benefits-of-electronics-recycling-ewaste.jpg"
+                    alt="Old Electronics">
+                <div class="item-details">
+                    <h3>Old Electronics</h3>
+                    <p>Great for repurposing or recycling parts.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+
+            <div class="item">
+                <img src="https://ewasa.org/wp-content/uploads/2023/03/3-1536x864.png" alt="Paper">
+                <div class="item-details">
+                    <h3>Paper</h3>
+                    <p>Recyclable for repurposing into new products.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+
+            <div class="item">
+                <img src="https://www.recyclingdepotadelaide.com.au/images/recycling-services/10c-deposit-refund-sa.jpg"
+                    alt="Plastic">
+                <div class="item-details">
+                    <h3>Plastic</h3>
+                    <p>Reusable for recycling into different items.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard container hidden" id="dashboard-section">
+        <h2 id="marketplace-title">Your Dashboard</h2>
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2013/07/13/12/45/woman-160281_1280.png" alt="Recycled Items">
+            <h3>Your Environmental Impact</h3>
+            <div class="waste-diverted">
+                <label for="wasteInput">Waste Diverted:</label>
+                <input type="text" id="wasteInput" placeholder="Enter amount in kg" oninput="calculateRating()">
+            </div>
+
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/ios-filled/100/4caf50/trash.png" alt="Recycled Trash">
+            <h3>Trash Collected</h3>
+            <div class="waste-diverted">
+                <label for="totalInput">Total:</label>
+                <input type="text" id="totalInput" placeholder="Enter amount in kg" oninput="calculateRating()">
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/ios-filled/100/4caf50/sustainability.png" alt="Sustainability">
+            <h3>Sustainability Rating</h3>
+            <p>Rating: <span id="ratingOutput">0</span>%</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Community Reporting Section -->
+    <section class="community-reporting container hidden" id="community-reporting-section">
+        <h2>Community Reporting</h2>
+        <form id="report-form">
+            <label for="issue">Describe the sanitation issue:</label>
+            <textarea id="issue" name="issue" rows="4" required></textarea>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter location" required>
+
+            <label for="image-upload">Upload an image:</label>
+            <input type="file" id="image-upload" name="image-upload" accept="image/*">
+
+            <button type="submit">Submit Report</button>
+        </form>
+    </section>
+
+    <script>
+
+        function calculateRating() {
+            const wasteDiverted = parseFloat(document.getElementById('wasteInput').value);
+            const totalWaste = parseFloat(document.getElementById('totalInput').value);
+            const ratingOutput = document.getElementById('ratingOutput');
+
+            if (!isNaN(wasteDiverted) && !isNaN(totalWaste) && totalWaste !== 0) {
+                const rating = (totalWaste / wasteDiverted) * 100;
+                ratingOutput.textContent = rating.toFixed(2); // Show 2 decimal places
+            } else {
+                ratingOutput.textContent = 0; // Reset to 0 if inputs are invalid
+            }
+        }
+
+        // JavaScript for handling the User menu dropdown and dynamic content
+        document.addEventListener('DOMContentLoaded', function () {
+            const userMenuLink = document.getElementById('user-menu-link');
+            const userDropdown = document.getElementById('user-dropdown');
+            const communitySection = document.getElementById('community-reporting-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            const marketplaceSection = document.getElementById('marketplace-section');
+            const marketplaceTitle = document.getElementById('marketplace-title');
+            const marketplaceContent = document.getElementById('marketplace-content');
+
+            userMenuLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                userDropdown.classList.toggle('show');
+            });
+
+            userDropdown.addEventListener('click', function (event) {
+                const target = event.target;
+                const sectionToShow = target.getAttribute('data-section');
+
+                if (sectionToShow === 'community') {
+                    communitySection.classList.remove('hidden');
+                    dashboardSection.classList.add('hidden');
+                    marketplaceTitle.classList.add('hidden');
+                    marketplaceContent.classList.add('hidden');
+                } else if (sectionToShow === 'dashboard') {
+                    communitySection.classList.add('hidden');
+                    dashboardSection.classList.remove('hidden');
+                    marketplaceTitle.classList.add('hidden');
+                    marketplaceContent.classList.add('hidden');
+                } else if (sectionToShow === 'account') {
+                    alert('Account section will be added soon.');
+                } else if (sectionToShow === 'setting') {
+                    alert('Settings section will be added soon.');
+                } else if (sectionToShow === 'admin') {
+                    alert('Admin section will be added soon.');
+                }
+            });
+
+            // Initially show Marketplace and hide Community and Dashboard sections
+            communitySection.classList.add('hidden');
+            dashboardSection.classList.add('hidden');
+            marketplaceTitle.classList.remove('hidden');
+            marketplaceContent.classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>

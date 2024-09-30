@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js To-Do List</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: auto; }
+        .task { display: flex; justify-content: space-between; padding: 10px; border: 1px solid #ccc; margin-top: 5px; }
+        .completed { text-decoration: line-through; }
+        button { margin-left: 10px; }
+    </style>
+</head>
+<body>
+
+<div id="app" class="container">
+    <h1>Vue.js To-Do List</h1>
+    <input type="text" v-model="newTask" placeholder="Add a new task">
+    <button @click="addTask">Add Task</button>
+    <div v-for="task in tasks" :key="task.id" class="task">
+        <span :class="{ completed: task.completed }">{{ task.text }}</span>
+        <div>
+            <button @click="toggleComplete(task.id)">Complete</button>
+            <button @click="deleteTask(task.id)">Delete</button>
+        </div>
+    </div>
+    <p>Total Tasks: {{ totalTasks }}</p>
+    <p>Completed Tasks: {{ completedTasks }}</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

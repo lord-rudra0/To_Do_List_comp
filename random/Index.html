@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CircularHub - Online Marketplace & Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <a href="#" class="nav-link">Cart</a>
+        </div>
+        <div class="nav-center">
+            <h1>CIRCULARHUB</h1>
+        </div>
+        <div class="nav-right user-menu">
+            <a href="#" id="user-menu-link" class="nav-link">User</a>
+            <div class="dropdown-content" id="user-dropdown">
+                <a href="#" data-section="admin">Admin</a>
+                <a href="#" data-section="community">Community</a>
+                <a href="#" data-section="dashboard">Dashboard</a>
+                <a href="#" data-section="account">Account</a>
+                <a href="#" data-section="setting">Setting</a>
+
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <h2>Transforming Waste into Valuable Resources</h2>
+        <p>CircularHub connects people to recycle, repurpose, or donate their waste materials, supporting the circular
+            economy for a sustainable future.</p>
+    </section>
+
+    <!-- Marketplace Section -->
+    <section class="marketplace container" id="marketplace-section">
+        <div id="marketplace-content">
+            <h2 id="marketplace-title">Marketplace</h2>
+            <div class="item">
+                <img src="https://www.recyclingdepotadelaide.com.au/images/recycling/scrap-metal-recycling-process.jpg"
+                    alt="Scrap Metal">
+                <div class="item-details">
+                    <h3>Scrap Metal</h3>
+                    <p>Available for recycling or repurposing.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+
+            <div class="item">
+                <img src="https://erikchristianjohnson.com/wp-content/uploads/2023/07/benefits-of-electronics-recycling-ewaste.jpg"
+                    alt="Old Electronics">
+                <div class="item-details">
+                    <h3>Old Electronics</h3>
+                    <p>Great for repurposing or recycling parts.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+
+            <div class="item">
+                <img src="https://ewasa.org/wp-content/uploads/2023/03/3-1536x864.png" alt="Paper">
+                <div class="item-details">
+                    <h3>Paper</h3>
+                    <p>Recyclable for repurposing into new products.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+
+            <div class="item">
+                <img src="https://www.recyclingdepotadelaide.com.au/images/recycling-services/10c-deposit-refund-sa.jpg"
+                    alt="Plastic">
+                <div class="item-details">
+                    <h3>Plastic</h3>
+                    <p>Reusable for recycling into different items.</p>
+                </div>
+                <button>LET'S SEE</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard container hidden" id="dashboard-section">
+        <h2 id="marketplace-title">Your Dashboard</h2>
+        <div class="card">
+            <img src="https://cdn.pixabay.com/photo/2013/07/13/12/45/woman-160281_1280.png" alt="Recycled Items">
+            <h3>Your Environmental Impact</h3>
+            <div class="waste-diverted">
+                <label for="wasteInput">Waste Diverted:</label>
+                <input type="text" id="wasteInput" placeholder="Enter amount in kg" oninput="calculateRating()">
+            </div>
+
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/ios-filled/100/4caf50/trash.png" alt="Recycled Trash">
+            <h3>Trash Collected</h3>
+            <div class="waste-diverted">
+                <label for="totalInput">Total:</label>
+                <input type="text" id="totalInput" placeholder="Enter amount in kg" oninput="calculateRating()">
+            </div>
+        </div>
+        <div class="card">
+            <img src="https://img.icons8.com/ios-filled/100/4caf50/sustainability.png" alt="Sustainability">
+            <h3>Sustainability Rating</h3>
+            <p>Rating: <span id="ratingOutput">0</span>%</p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Community Reporting Section -->
+    <section class="community-reporting container hidden" id="community-reporting-section">
+        <h2>Community Reporting</h2>
+        <form id="report-form">
+            <label for="issue">Describe the sanitation issue:</label>
+            <textarea id="issue" name="issue" rows="4" required></textarea>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter location" required>
+
+            <label for="image-upload">Upload an image:</label>
+            <input type="file" id="image-upload" name="image-upload" accept="image/*">
+
+            <button type="submit">Submit Report</button>
+        </form>
+    </section>
+
+    <script>
+
+        function calculateRating() {
+            const wasteDiverted = parseFloat(document.getElementById('wasteInput').value);
+            const totalWaste = parseFloat(document.getElementById('totalInput').value);
+            const ratingOutput = document.getElementById('ratingOutput');
+
+            if (!isNaN(wasteDiverted) && !isNaN(totalWaste) && totalWaste !== 0) {
+                const rating = (totalWaste / wasteDiverted) * 100;
+                ratingOutput.textContent = rating.toFixed(2); // Show 2 decimal places
+            } else {
+                ratingOutput.textContent = 0; // Reset to 0 if inputs are invalid
+            }
+        }
+
+        // JavaScript for handling the User menu dropdown and dynamic content
+        document.addEventListener('DOMContentLoaded', function () {
+            const userMenuLink = document.getElementById('user-menu-link');
+            const userDropdown = document.getElementById('user-dropdown');
+            const communitySection = document.getElementById('community-reporting-section');
+            const dashboardSection = document.getElementById('dashboard-section');
+            const marketplaceSection = document.getElementById('marketplace-section');
+            const marketplaceTitle = document.getElementById('marketplace-title');
+            const marketplaceContent = document.getElementById('marketplace-content');
+
+            userMenuLink.addEventListener('click', function (event) {
+                event.preventDefault();
+                userDropdown.classList.toggle('show');
+            });
+
+            userDropdown.addEventListener('click', function (event) {
+                const target = event.target;
+                const sectionToShow = target.getAttribute('data-section');
+
+                if (sectionToShow === 'community') {
+                    communitySection.classList.remove('hidden');
+                    dashboardSection.classList.add('hidden');
+                    marketplaceTitle.classList.add('hidden');
+                    marketplaceContent.classList.add('hidden');
+                } else if (sectionToShow === 'dashboard') {
+                    communitySection.classList.add('hidden');
+                    dashboardSection.classList.remove('hidden');
+                    marketplaceTitle.classList.add('hidden');
+                    marketplaceContent.classList.add('hidden');
+                } else if (sectionToShow === 'account') {
+                    alert('Account section will be added soon.');
+                } else if (sectionToShow === 'setting') {
+                    alert('Settings section will be added soon.');
+                } else if (sectionToShow === 'admin') {
+                    alert('Admin section will be added soon.');
+                }
+            });
+
+            // Initially show Marketplace and hide Community and Dashboard sections
+            communitySection.classList.add('hidden');
+            dashboardSection.classList.add('hidden');
+            marketplaceTitle.classList.remove('hidden');
+            marketplaceContent.classList.remove('hidden');
+        });
+    </script>
+</body>
+
+</html>

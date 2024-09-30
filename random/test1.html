@@ -1,0 +1,331 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembler</title>
+    <link rel="stylesheet" href="STL1.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-center container">
+            <!-- <h1>GUI OF PASS1 AND PASS2 ASSEMBLER</h1> -->
+            <h1>TWO PASS ASSEMBLER</h1>
+        </div>
+    </nav>
+
+    <div class="container place">
+
+        <label id="lvl" for="pass1">ENTER ASSEMBLY CODE</label><br><br>
+
+        <input type="file" name="file" id="file1" accept=".txt">
+        <button id="btn1">Upload</button>
+        <br><br>
+
+
+
+
+
+
+
+
+
+        <div class="fulline">
+
+            <div class="text1">
+                <label for="text1" style="font-family:fantasy; ">ASSEMBLY CODE</label>
+                <textarea id="pass1" placeholder="Enter your assembly code here......."></textarea>
+
+            </div>
+
+            <div class="textt">
+                &nbsp;&nbsp;<label for="op" style="font-family:fantasy;">OPTAB</label>
+                <textarea id="op" placeholder="Your opcode will display here"></textarea>
+
+            </div>
+        </div>
+        <button id="btnp1">PASSONE</button>
+
+
+        <h3>OUTPUT FOR PASS 1</h3>
+        <div class="fulline">
+            <div class="text1">
+                <H5>INTERMEDIATE FILE</H5>
+                <textarea readonly id="output1" placeholder="You will get INTERMEDIATE FILE for pass 1 here"></textarea>
+            </div>
+            <div class="textt">
+                <H5>SYMTAB</H5>
+                <textarea readonly id="symtab" placeholder="Your symtab wil display here"></textarea>
+            </div>
+        </div>
+        <button id="btnp2">PASSTWO</button>
+
+
+        <h3>OUTPUT FOR PASS 2</h3>
+        <textarea readonly id="output2" placeholder="You will get output for pass 2 here"></textarea>
+    </div>
+
+    <script>
+        const btn1 = document.getElementById("btn1");
+        const file1 = document.getElementById("file1");
+        const output1 = document.getElementById("output1");
+        const output2 = document.getElementById("output2");
+        const op = document.getElementById("op");
+        const optab = new Map([
+            ['ADD', '18'],
+            ['ADDF', '58'],
+            ['ADDR', '90'],
+            ['AND', '40'],
+            ['CLEAR', 'B4'],
+            ['COMP', '28'],
+            ['COMPF', '88'],
+            ['COMPR', 'A0'],
+            ['DIV', '24'],
+            ['DIVF', '64'],
+            ['DIVR', '9C'],
+            ['FIX', 'C4'],
+            ['FLOAT', 'C0'],
+            ['HIO', 'F4'],
+            ['J', '3C'],
+            ['JEQ', '30'],
+            ['JGT', '34'],
+            ['JLT', '38'],
+            ['JSUB', '48'],
+            ['LDA', '00'],
+            ['LDB', '68'],
+            ['LDCH', '50'],
+            ['LDF', '70'],
+            ['LDL', '08'],
+            ['LDS', '6C'],
+            ['LDT', '74'],
+            ['LDX', '04'],
+            ['LPS', 'D0'],
+            ['MUL', '20'],
+            ['MULF', '60'],
+            ['MULR', '98'],
+            ['NORM', 'C8'],
+            ['OR', '44'],
+            ['RD', 'D8'],
+            ['RMO', 'AC'],
+            ['RSUB', '4C'],
+            ['SHIFTL', 'A4'],
+            ['SHIFTR', 'A8'],
+            ['SIO', 'F0'],
+            ['SSK', 'EC'],
+            ['STA', '0C'],
+            ['STB', '78'],
+            ['STCH', '54'],
+            ['STF', '80'],
+            ['STI', 'D4'],
+            ['STL', '14'],
+            ['STS', '7C'],
+            ['STSW', 'E8'],
+            ['STT', '84'],
+            ['STX', '10'],
+            ['SUB', '1C'],
+            ['SUBF', '5C'],
+            ['SUBR', '94'],
+            ['SVC', 'B0'],
+            ['TD', 'E0'],
+            ['TIO', 'F8'],
+            ['TIX', '2C'],
+            ['TIXR', 'B8'],
+            ['WD', 'DC'],
+            ['HLT', ""]
+        ]);
+
+
+
+        btn1.addEventListener("click", function () {
+            const file = file1.files[0];
+            if (file !== undefined) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const text = e.target.result;
+                    document.getElementById("pass1").value = text;
+
+                    const code = document.getElementById("pass1").value;
+                    op.value = '';
+                    const words = code.split(/\s+/);
+                    for (let word of words) {
+                        const trimmedWord = word.trim();
+                        if (optab.has(trimmedWord)) {
+                            const value = optab.get(trimmedWord);
+                            op.value += `${trimmedWord}: ${value}\n`;
+                        }
+                    }
+                };
+                reader.readAsText(file);
+
+
+            } else {
+                alert("Please upload the file");
+            }
+        });
+
+        /* function passOne() {
+             const symtab = new Map();
+             const optab = {
+                 'RESW':{length:3},
+                 'RESB':{length:1},
+                 'BYTE':{calculateLength: (operand) =>operand.length},
+                 'WORD':{length:3},
+                 
+             }
+             console.log("Pass 1");
+             let locctr = 0;
+             let programLength = 0;
+ 
+             const code = document.getElementById("pass1").value;
+             function parselines(code) {
+                 const parts = line.split("\n");
+                 const level = parts[0];
+                 const opcode = parts[1];
+                 const operand = parts[2];
+                 return { level, opcode, operand };
+ 
+             }
+             function proessLine(line) {
+                 const{level,opcode,operand}=parselines(line);
+                 if(opcode==="START"){
+                     locctr=parseInt(operand,16);
+                     start=locctr;
+                     return `${locctr.toString(16).toUpperCase()} ${level} ${opcode} ${operand}`;
+                 }
+                 else{
+                     locctr=start;
+                     return `${locctr.toString(16).toUpperCase()} ${level} ${opcode} ${operand}`;
+                 }
+ 
+ 
+             }
+             if(lebel)
+                 if(symtab.has(label)){
+                     alert("Duplicate label");
+                 }
+                 else{
+                     symtab.set(label,locctr);
+                 }
+             if(OPTAB[opcode]){
+                 locctr+=3;
+             }
+             else if(opcode==="WORD"){
+                 locctr+=3;
+             }
+             else if(opcode==="RESW"){
+                 locctr+=3*parseInt(operand);
+             }
+             else if(opcode==="RESB"){
+                 locctr+=parseInt(operand);
+             }
+             else if(opcode==="BYTE"){
+                 locctr+=operand.length;
+             }
+             else if(opcode==="END"){
+                 return;
+             }
+             else{
+                 alert("Invalid opcode");
+             }
+ 
+             function assemble() {
+                 sourceLines.forEach(line => {
+                     processSourceLine(line);
+                 });
+                 
+             }
+             programLength= locctr-parseInt(sourceLines[0].split(" ")[2]);
+             console.log("Program Length: ",programLength);
+             return programLength;
+             passOne();
+         }*/
+        const symtab = new Map(); // Symbol table to store labels and addresses
+
+        let locctr = 0; // Location counter
+        let start = 0;
+
+        // Helper function to parse each line of assembly code
+        function parselines(line) {
+            const parts = line.trim().split(/\s+/); // Split line by spaces
+            const label = parts.length === 3 ? parts[0] : ''; // If 3 parts, label exists
+            const opcode = parts.length === 3 ? parts[1] : parts[0]; // Opcode may be the first part if no label
+            const operand = parts.length === 3 ? parts[2] : parts[1]; // Operand follows opcode
+            return { label, opcode, operand };
+        }
+
+        // Function to process each line and calculate location counter
+        function processLine(line) {
+            const { label, opcode, operand } = parselines(line);
+
+            if (opcode === "START") {
+                locctr = parseInt(operand, 16); // Initialize locctr with operand (start address)
+                start = locctr;
+                return `${locctr.toString(16).toUpperCase()} ${label} ${opcode} ${operand}`;
+            }
+
+            if (label) {
+                if (symtab.has(label)) {
+                    alert("Duplicate label found: " + label);
+                    return;
+                }
+                symtab.set(label, locctr); // Add label to symbol table
+            }
+
+            if (optab.has(opcode)) {
+                locctr += 3; // Assuming 3 bytes for each instruction in optab
+            } else if (opcode === "WORD") {
+                locctr += 3;
+            } else if (opcode === "RESW") {
+                locctr += 3 * parseInt(operand); // Multiply for word
+            } else if (opcode === "RESB") {
+                locctr += parseInt(operand); // Increment by operand value for bytes
+            } else if (opcode === "BYTE") {
+                locctr += operand.length; // Increment by operand length for BYTE
+            } else if (opcode === "END") {
+                return; // End of the program
+            } else {
+                alert("Invalid opcode: " + opcode);
+            }
+
+            return `${locctr.toString(16).toUpperCase()} ${label} ${opcode} ${operand}`;
+        }
+
+        // Pass One function to process all lines
+        function passOne() {
+            const code = document.getElementById("pass1").value;
+            const lines = code.split("\n"); // Split code into individual lines
+            locctr = 0; // Reset location counter
+            symtab.clear(); // Clear the symbol table at the start of Pass 1
+
+            let output = ""; // Variable to store the output
+            let symtabOutput = ""; // Variable to store symbol table output
+
+            for (let line of lines) {
+                if (line.trim()) {
+                    const processedLine = processLine(line);
+                    output += processedLine + "\n"; // Append processed line to output
+                }
+            }
+
+            // Display symbol table
+            symtab.forEach((value, key) => {
+                symtabOutput += `${key}: ${value.toString(16).toUpperCase()}\n`;
+            });
+
+            document.getElementById("output1").value = output; // Show intermediate file output
+            document.getElementById("symtab").value = symtabOutput; // Show symbol table
+        }
+
+        // Event listener for Pass One button
+        document.getElementById("btnp1").addEventListener("click", passOne);
+
+
+
+
+    </script>
+</body>
+
+</html>

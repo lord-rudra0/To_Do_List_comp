@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload Example</title>
+    <style>
+        #uploadButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #uploadButton:disabled {
+            background-color: #d3d3d3; /* Light gray */
+            cursor: not-allowed; /* Change cursor style */
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="fileInput" />
+    <button id="uploadButton">Upload File</button>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function() {
+            const uploadButton = document.getElementById('uploadButton');
+
+            // Check if a file is selected
+            if (this.files.length > 0) {
+                // Change the button text
+                uploadButton.textContent = 'File Uploaded';
+
+                // Disable the button
+                uploadButton.disabled = true;
+
+                // Optionally, change the style of the button
+                uploadButton.style.backgroundColor = '#d3d3d3'; // Light gray background
+                uploadButton.style.color = '#fff'; // White text
+            }
+        });
+    </script>
+</body>
+</html>
