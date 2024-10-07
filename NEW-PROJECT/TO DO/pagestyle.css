@@ -112,44 +112,50 @@
 }
 
 .tasklist {
-    display: flex;               
-    justify-content: space-between; 
-    gap: 20px;                   
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
     padding: 20px;
     margin: 10px;
-  }
-  .tasklist:hover {
+}
+
+.tasklist:hover {
     background-color: #e9ecef;
     box-shadow: 0px 8px 16px rgba(16, 4, 4, 0.2);
-  }
-  
-  #newtask, #endlist {
-    flex: 1;                     
-    border: 1px solid #d03b3b;       
-    padding: 10px;
-  }
+}
 
-  
-  h2 {
-    text-align: center;           
-  }
-  #clearall{
+#newtask,
+#endlist {
+    flex: 1;
+    border: 1px solid #d03b3b;
+    padding: 10px;
+}
+
+
+h2 {
+    text-align: center;
+}
+
+#clearall {
     background-color: rgb(237, 57, 30);
     color: white;
-  }
-  #clearall:hover{
+}
+
+#clearall:hover {
     background-color: #252a2f;
     color: #d03b3b;
-  }
+}
 
-  #list1, #list2
-  {
+#list1,
+#list2 {
     box-sizing: border-box;
     border-radius: 10px;
     border-color: #202ae3;
     border-width: 2px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  } .task-box {
+}
+
+.task-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -158,19 +164,140 @@
     margin: 10px 0;
     background-color: #f9f9f9;
 }
+
 .completed {
     text-decoration: line-through;
 }
+
 .task-buttons {
     display: flex;
     gap: 10px;
 }
+
 .high-priority {
     color: red;
 }
+
 .medium-priority {
     color: orange;
 }
+
 .low-priority {
     color: green;
+}
+
+.main {
+    background-color: rgb(170, 237, 237);
+    box-sizing: border-box;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .btnline {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    #task {
+        width: 100%;
+        margin: 0px;
+
+    }
+
+    #add {
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #delete {
+        margin-left: 0px;
+    }
+
+    #mark {
+        margin-left: 0px;
+    }
+
+    .tasklist {
+        flex-direction: column;
+    }
+
+    #newtask,
+    #endlist {
+        width: 100%;
+    }
+
+    .task-box {
+        flex-direction: column;
+    }
+
+    .task-buttons {
+        flex-direction: column;
+    }
+
+    .main {
+        margin: 0px;
+    }
+
+
+}
+
+@media screen and (max-width: 400px) {
+    .btnline {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    #task {
+        width: 100%;
+        margin: 0px;
+
+    }
+
+    #add {
+        margin-left: 0px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #delete {
+        margin-left: 0px;
+    }
+
+    #mark {
+        margin-left: 0px;
+    }
+
+    .tasklist {
+        flex-direction: column;
+    }
+
+    #newtask,
+    #endlist {
+        width: 100%;
+    }
+
+    .task-box {
+        flex-direction: column;
+    }
+
+    .task-buttons {
+        flex-direction: column;
+    }
+
+    .main {
+        margin: 0px;
+    }
+
+    .input-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+
 }

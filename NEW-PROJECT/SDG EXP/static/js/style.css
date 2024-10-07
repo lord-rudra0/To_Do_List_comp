@@ -1,0 +1,11 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.sdg-card {
+    margin-bottom: 20px;
+}
+
+.loader img {
+    width: 50px;
+}

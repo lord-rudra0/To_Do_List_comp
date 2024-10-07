@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG {{ sdg.sdg_number }}: {{ sdg.sdg_title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container mt-4">
+        <h1>SDG {{ sdg.sdg_number }}: {{ sdg.sdg_title }}</h1>
+        <p>{{ sdg.description }}</p>
+
+        <h3>Progress Toward 2030</h3>
+        <canvas id="progressChart" width="400" height="200"></canvas>
+
+        <h3>Earth Observation Data</h3>
+        <p>{{ sdg.earth_data }}</p>
+
+        <h3>Case Study</h3>
+        <p>{{ sdg.case_study }}</p>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('progressChart').getContext('2d');
+        var progressChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2015', '2020', '2025', '2030'],
+                datasets: [{
+                    label: 'Global Progress',
+                    data: [{{ sdg.progress_current }}, 50, 70, {{ sdg.target_2030 }}],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            fill: false,
+            tension: 0.1
+        }]
+            },
+        options: {
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+        });
+    </script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

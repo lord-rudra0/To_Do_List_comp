@@ -1,8 +1,8 @@
-print("enter two numbers:")
-# read two numbers
-int
-num1 = input()
-num2 = input()
-sum = num1 + num2
-print("The sum is " + sum)
-1
+#write the code to add two numbers user inputs
+a = int(input("Enter the first number: "))
+b = int(input("Enter the second number: "))
+sum = a + b
+print("The sum of the two numbers is", sum)
+# give code to convert the sum to string and print the type of the sum
+sum = str(sum)
+print(type(sum))

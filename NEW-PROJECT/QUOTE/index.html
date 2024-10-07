@@ -57,7 +57,7 @@ The Quote Generator website will provide users with a curated collection of quot
   - HTML, CSS, JavaScript (optional framework like Vue.js or React for enhanced interactivity).
   
 - **Backend:**
-  - Node.js or Python with Flask/Django for handling submissions and quote database.
+  Python Flask for handling submissions and quote database.
   
 - **Database:**
   - SQLite or MongoDB for storing quotes, user submissions, and categories.
@@ -115,49 +115,69 @@ Would you like guidance on how to implement any of these features?
  -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUOTE GENERATOR</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>QUOTE GENERATOR</title>
+   <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <script src="script.js"></script>
 </head>
+
 <body>
-    <nav class="navba" style="text-align: center; box-shadow:0 2px 4px; box-sizing:border-box">
-        <h1>QUOTE GENERATOR</h1>
-    </nav>
-    <div>
-        <div>
-            <h3>
-                Post a Quote
-            </h3>
-            <form action="">
-                <textarea  id="Postqu" placeholder="Post a Quote" required></textarea>
-                <button id="Postbtn">Post</button>
-                <input type="text" id="author" placeholder="Author" required>
-            </form>
-        </div>
-        <div id="quote-box">
-            <div id="text">"Quote Text"</div>
-            <div id="author">- Author</div>
-            <button id="new-quote">New Quote</button>
-            <div>
-                <select id="category">
-                    <option value="all">All</option>
-                    <option value="motivational">Motivational</option>
-                    <option value="inspirational">Inspirational</option>
-                    <option value="love">Love</option>
-                    <option value="success">Success</option>
-                    <option value="happiness">Happiness</option>
-                    <option value="life">Life</option>
-                    <option value="friendship">Friendship</option>
-                    <option value="Sad">Sad</option>
-                </select>
-            </div>
-            <button id="share-quote">Share Quote</button>
-            <button id="copy">Copy Quote</button>
-            <!-- <a id="tweet-quote" href="#" target="_blank">Tweet Quote</a> -->
-        </div>
-    </div>
+   <nav class="navba" style="text-align: center; box-shadow:0 2px 4px; box-sizing:border-box">
+      <h1>QUOTE GENERATOR</h1>
+   </nav>
+   <div>
+      <div>
+         <h3>
+            Post a Quote
+         </h3>
+         <form action="">
+            <textarea id="Postqu" placeholder="Post a Quote" required></textarea>
+            <button id="Postbtn">Post</button>
+            <input type="text" id="author" placeholder="Author" required>
+         </form>
+      </div>
+      <div id="quote-box">
+         <div id="text">"Quote Text"</div>
+         <div id="author">- Author</div>
+         <button id="new-quote">New Quote</button>
+         <div>
+            <select id="category">
+               <option value="all">All</option>
+               <option value="motivational">Motivational</option>
+               <option value="inspirational">Inspirational</option>
+               <option value="love">Love</option>
+               <option value="success">Success</option>
+               <option value="happiness">Happiness</option>
+               <option value="life">Life</option>
+               <option value="friendship">Friendship</option>
+               <option value="Sad">Sad</option>
+            </select>
+         </div>
+         <button id="share-quote">Share Quote</button>
+         <button id="copy">Copy Quote</button>
+         <!-- <a id="tweet-quote" href="#" target="_blank">Tweet Quote</a> -->
+      </div>
+
+      <div id="share">
+         <h3>Share Quote</h3>
+         <div>
+            <!-- share button with platform logo  -->
+            <button id="twitter">
+               <i class="fab fa twitter "></i>
+            </button>
+            <!-- create logo of twitter -->
+
+
+            <button id="linkedin">Linkedin</button>
+            <button id="facebook">Facebook</button>
+            <button id="whatsapp">Whatsapp</button>
+
+         </div>
+      </div>
 </body>
+
 </html>

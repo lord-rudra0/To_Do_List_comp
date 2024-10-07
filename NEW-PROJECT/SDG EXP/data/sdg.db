@@ -1,0 +1,26 @@
+@app.route('/populate_sdg_data')
+def populate_sdg_data():
+    sdgs = [
+        SDG(
+            sdg_number=1,
+            sdg_title="No Poverty",
+            description="End poverty in all its forms everywhere by 2030...",
+            earth_data="NASA Earth Observation data provides critical insights...",
+            progress_current=40.0,
+            target_2030=100.0,
+            case_study="In sub-Saharan Africa, satellite data is used..."
+        ),
+        SDG(
+            sdg_number=2,
+            sdg_title="Zero Hunger",
+            description="End hunger, achieve food security and improved nutrition...",
+            earth_data="NASA Worldview provides real-time data on soil moisture...",
+            progress_current=50.0,
+            target_2030=100.0,
+            case_study="In India, satellite data is used to predict crop yields..."
+        ),
+        # Add similar entries for all 17 SDGs...
+    ]
+    db.session.add_all(sdgs)
+    db.session.commit()
+    return "SDG data populated successfully"
