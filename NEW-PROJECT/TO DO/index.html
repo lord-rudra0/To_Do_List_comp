@@ -54,7 +54,7 @@
             if (!taskInput) return alert("Please enter a task!");
 
             currentEditingTaskId ? updateTask(currentEditingTaskId, taskInput) : createNewTask(taskInput);
-            document.getElementById("task").value = ""; // Clear input
+            document.getElementById("task").value = ""; 
             saveTasks();
             updateTaskCounts();
         }
