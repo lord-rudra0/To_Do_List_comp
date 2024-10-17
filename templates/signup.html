@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: rgba(200, 220, 255, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 20px;
+      }
+
+      .login-container {
+        display: flex;
+        background-color: rgba(155, 155, 255, 1);
+        width: 100%;
+        max-width: 900px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        flex-direction: row;
+        overflow: hidden;
+      }
+
+      .login-form {
+        flex: 1;
+        padding: 40px;
+      }
+
+      .login-image {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .login-image img {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .login-form h1 {
+        font-size: 28px;
+        color: #333;
+        text-align: center;
+        margin-bottom: 3px;
+        font-weight: 700;
+      }
+
+      .login-form p {
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 500;
+      }
+
+      .login-form label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+
+      .login-form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #333;
+        border-radius: 4px;
+      }
+
+      .login-form input:hover,
+      .login-form input:focus {
+        outline: none;
+        border-color: #4a6cf7;
+        filter: drop-shadow(0 0 0.5rem #4a6cf7);
+      }
+
+      .login-form .forgot-password {
+        text-decoration: none;
+        margin-bottom: 20px;
+        display: block;
+        font-size: 14px;
+      }
+
+      .login-form .login-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #4a6cf7;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+
+      .login-form .login-btn:hover {
+        background-color: #375ac0;
+        filter: drop-shadow(0 0 0.5rem #375ac0);
+      }
+
+      .login-form .google-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: white;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .login-form .google-btn:hover {
+        background-color: #f1f1f1;
+        filter: drop-shadow(0 0 0.5rem #ccc);
+      }
+
+      .login-form .google-btn img {
+        margin-right: 8px;
+      }
+
+      .login-form p {
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .login-form a {
+        color: #4a6cf7;
+        text-decoration: none;
+      }
+
+      .login-form a:hover {
+        text-decoration: underline;
+      }
+
+      .login-image {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .login-image img {
+        width: 100%;
+        height: auto;
+        max-height: 100%;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .login-image p {
+        color: #333;
+        text-align: center;
+      }
+
+      @media (max-height: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .login-form {
+          padding: 20px;
+        }
+
+        .login-form h1 {
+          font-size: 24px;
+        }
+
+        .login-form input,
+        .login-form .login-btn,
+        .login-form .google-btn {
+          padding: 8px;
+        }
+
+        .login-form .login-btn,
+        .login-form .google-btn {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-form">
+        <h1>Create Account</h1>
+        <p>Please enter your details below</p>
+
+        <form action="{{ url_for('register_submit') }}" method="POST ">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+            name="name"
+          />
+
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label for="password">Password</label>
+          <input
+            name="password"
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            required
+          />
+
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            name="confirm-password"
+            type="password"
+            id="confirm-password"
+            placeholder="Confirm your password"
+            required
+          />
+
+          <button type="submit" class="login-btn">Sign up</button>
+        </form>
+
+        <p>Already have an account? <a href="#">Log in</a></p>
+
+        <button class="google-btn">
+          <img
+            src="https://envs.sh/nx7.png"
+            alt="Google Logo"
+            width="20"
+            height="20"
+          />
+          Sign up with Google
+        </button>
+      </div>
+
+      <div class="login-image">
+        <img src="https://envs.sh/nx9.png" alt="Task illustration" />
+      </div>
+    </div>
+  </body>
+</html>
