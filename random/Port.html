@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rudra Pratap Singh: Web & App Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #007acc;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+        }
+
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #007acc;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: #005999;
+        }
+
+        section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        #about {
+            background-color: #fff;
+            padding: 40px 20px;
+        }
+
+        #about h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        #about p {
+            font-size: 1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        #skills {
+            background-color: #f9f9f9;
+        }
+
+        #skills h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .skills-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            background-color: #007acc;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        #projects {
+            background-color: #fff;
+        }
+
+        #projects h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .project h3 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .project p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .project a {
+            text-decoration: none;
+            color: #007acc;
+            font-weight: bold;
+        }
+
+        .project a:hover {
+            color: #005999;
+        }
+
+        .more-projects {
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        #contact {
+            background-color: #007acc;
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        #contact h2 {
+            margin-bottom: 20px;
+        }
+
+        #contact form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #contact input,
+        #contact textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        #contact button {
+            background-color: #005999;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #contact button:hover {
+            background-color: #003f73;
+        }
+
+        footer {
+            background-color: #003f73;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Rudra Pratap Singh</h1>
+        <p>Web & App Developer | Creating Modern & Scalable Solutions</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm a 3rd-year student majoring in [Your Major] at [Your University], specializing in building dynamic web
+            and mobile applications. I am passionate about writing clean, efficient code, and I enjoy creating solutions
+            that are user-friendly and aesthetically pleasing.</p>
+    </section>
+
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-list">
+            <div class="skill">Python</div>
+            <div class="skill">Java</div>
+            <div class="skill">C</div>
+            <div class="skill">C#</div>
+            <div class="skill">HTML & CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Flask</div>
+            <div class="skill">React</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">Express</div>
+            <div class="skill">MongoDB</div>
+            <div class="skill">SQL</div>
+            <div class="skill">Git & GitHub</div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <div class="project">
+                <h3>CircularHub</h3>
+                <p>A platform for sustainable waste management, allowing users to recycle, repurpose, or donate waste
+                    materials.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project">
+                <h3>SDG Educational Tool</h3>
+                <p>An interactive tool designed to teach high school students about the Sustainable Development Goals
+                    (SDGs).</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project">
+                <h3>To-Do List App</h3>
+                <p>A responsive task management application built with Vue.js to help users stay organized.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project">
+                <h3>Project Management System</h3>
+                <p>A web application to track project progress, tasks, and deadlines for efficient team collaboration.
+                </p>
+                <a href="#">View Project</a>
+            </div>
+        </div>
+        <div class="more-projects">
+            <h3>Want to see more?</h3>
+            <p>Contact me to see more of my work and discuss potential collaboration.</p>
+            <a href="#">View More Projects</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form action="mailto:youremail@example.com" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Rudra Pratap Singh. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

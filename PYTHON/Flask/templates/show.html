@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+   <h3> <a href="{{url_for('home')}}">Home</a> </h3>
+    <h3> student example </h3>
+    </div>
+    <hr/>
+    {%- for message in get_flashed_messages() %}
+      <div class="alert alert-danger">
+        {{ message }}
+      </div>
+      {%- endfor %}
+    <h1>Student (<a href="{{url_for('new')}}"> Add student </h1>
+
+        <table border=1>
+            <thead>  
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Pin</th>
+            </thead>
+            <tbody>
+                {%- for student in students %}
+                    <tr>
+                        <td>{{student.name}}</td>
+                        <td>{{student.addr}}</td>
+                        <td>{{student.city}}</td>
+                        <td>{{student.pin}}</td>
+                    </tr>
+                {%- endfor %}
+            </tbody>
+        </table>
+        
+
+
+
+  </body>
+</html>

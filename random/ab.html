@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Website Header</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            height: 300px;
+            background: linear-gradient(135deg, #2d0055, #001f5c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background-color: #ff6b00;
+            border-radius: 50%;
+            top: 50px;
+            left: 50px;
+            z-index: 1;
+        }
+        .header::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: #00b0ff;
+            border-radius: 50%;
+            bottom: 30px;
+            right: 50px;
+            z-index: 1;
+        }
+        .header h1 {
+            color: white;
+            z-index: 2;
+            font-size: 48px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Welcome to My Website</h1>
+    </div>
+
+</body>
+</html>

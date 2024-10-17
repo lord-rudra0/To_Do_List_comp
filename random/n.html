@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Two-Pass Assembler</title>
+    <style>
+        body {
+            font-family: "Roboto", sans-serif;
+            background-color: #fcfaee;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            padding: 40px;
+            background: #ecdfcc;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #da8359;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #a5b68d;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 1rem;
+            background-color: #fcfaee;
+            border: 2px solid #a5b68d;
+            border-radius: 8px;
+            transition: border 0.3s ease;
+        }
+
+        button {
+            margin: 10px 5px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            background-color: #a5b68d;
+            color: #fcfaee;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #da8359;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        pre {
+            background-color: #fcfaee;
+            padding: 15px;
+            border: 2px solid #ecdfcc;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-size: 1rem;
+            white-space: pre-wrap;
+            height: 150px;
+        }
+
+        pre::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        pre::-webkit-scrollbar-thumb {
+            background-color: #a5b68d;
+            border-radius: 5px;
+        }
+
+        pre::-webkit-scrollbar-thumb:hover {
+            background-color: #da8359;
+        }
+
+        .output-section {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Two-Pass Assembler</h1>
+
+        <div class="output-section">
+            <h2>Upload Assembly Code</h2>
+            <input type="file" id="assemblyFile" accept=".txt" />
+        </div>
+
+        <button onclick="processFile()">Run Assembler</button>
+
+        <div class="output-section">
+            <h2>Pass 1 Output (Intermediate File)</h2>
+            <pre id="intermediateOutput"></pre>
+        </div>
+
+        <div class="output-section">
+            <h2>Pass 2 Output (Object Code)</h2>
+            <pre id="pass2Output"></pre>
+        </div>
+    </div>
+
+    <script>
+        const opcodeMap = {
+            LDA: "00",
+            ADD: "18",
+            SUB: "1C",
+            STA: "0C",
+            BYTE: "??",
+            WORD: "??",
+            RESB: "??",
+            RESW: "??",
+            END: "??",
+        };
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    resolve(event.target.result);
+                };
+                reader.onerror = reject;
+                reader.readAsText(file);
+            });
+        }
+
+        async function processFile() {
+            const assemblyFile = document.getElementById("assemblyFile").files[0];
+
+            if (!assemblyFile) {
+                alert("Please upload the assembly file.");
+                return;
+            }
+
+            try {
+                const assemblyText = await readFile(assemblyFile);
+                const assemblyCode = assemblyText.trim().split("\n");
+
+                const pass1Output = passOne(assemblyCode);
+                document.getElementById("intermediateOutput").innerText = pass1Output;
+
+                const pass2Output = passTwo(assemblyCode);
+                document.getElementById("pass2Output").innerText = pass2Output;
+            } catch (error) {
+                alert("Error reading the file: " + error.message);
+            }
+        }
+
+        function passOne(assemblyCode) {
+            const symbolTable = {};
+            let locationCounter = parseInt(assemblyCode[0].split(/\s+/)[2], 16); // Start location (from START directive)
+            let output = "";
+
+            assemblyCode.forEach((line, index) => {
+                const parts = line.trim().split(/\s+/);
+                let label = parts[0];
+                const opcode = parts[1];
+                const operand = parts[2];
+
+                // Format the location counter and line for the intermediate file
+                output += `${locationCounter.toString(16).toUpperCase().padStart(4, "0")}\t`;
+
+                // Handle START directive
+                if (opcode === "START") {
+                    output += `${label}\t${opcode}\t${operand}\n`;
+                    return;
+                }
+
+                // If the line has a label, add it to the symbol table
+                if (label !== "-") {
+                    symbolTable[label] = locationCounter.toString(16).toUpperCase();
+                }
+
+                // Update the location counter based on opcode
+                switch (opcode) {
+                    case "BYTE":
+                        const byteSize = operand.length - 3; // Assuming format C'...' for BYTE
+                        locationCounter += byteSize;
+                        break;
+                    case "WORD":
+                        locationCounter += 3;
+                        break;
+                    case "RESB":
+                        locationCounter += parseInt(operand);
+                        break;
+                    case "RESW":
+                        locationCounter += 3 * parseInt(operand);
+                        break;
+                    default:
+                        locationCounter += 3; // Default for typical instructions like LDA, ADD, etc.
+                        break;
+                }
+
+                output += `${label || "-"}\t${opcode}\t${operand || "-"}\n`;
+            });
+
+            return output;
+        }
+
+        function passTwo(assemblyCode) {
+            const symbolTable = {};
+            let locationCounter = parseInt(assemblyCode[0].split(/\s+/)[2], 16);
+            let output = "";
+            let textRecord = "";
+
+            // Construct symbol table again
+            assemblyCode.forEach((line) => {
+                const parts = line.trim().split(/\s+/);
+                const label = parts[0];
+
+                if (label !== "-" && !symbolTable[label]) {
+                    symbolTable[label] = locationCounter.toString(16).toUpperCase();
+                }
+
+                const opcode = parts[1];
+                const operand = parts[2];
+
+                if (opcode === "BYTE") {
+                    locationCounter += operand.length - 3;
+                } else if (opcode === "WORD") {
+                    locationCounter += 3;
+                } else if (opcode === "RESB") {
+                    locationCounter += parseInt(operand);
+                } else if (opcode === "RESW") {
+                    locationCounter += 3 * parseInt(operand);
+                } else {
+                    locationCounter += 3;
+                }
+            });
+
+            const startLabel = assemblyCode[0].split(/\s+/)[0];
+            output += `H ${startLabel} ${symbolTable[startLabel]} ${assemblyCode.length}\n`;
+
+            assemblyCode.forEach((line) => {
+                const parts = line.trim().split(/\s+/);
+                const opcode = parts[1];
+                const operand = parts[2];
+
+                const address =
+                    operand && symbolTable[operand] !== undefined
+                        ? symbolTable[operand]
+                        : "??";
+                const opcodeAddress = opcodeMap[opcode] || "??";
+                textRecord += `${opcodeAddress} ${address} `;
+            });
+
+            output += `T ${textRecord.trim()}\n`;
+            output += `E ${symbolTable[startLabel]}\n`;
+
+            return output;
+        }
+    </script>
+</body>
+
+</html>

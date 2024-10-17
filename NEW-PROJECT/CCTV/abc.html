@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .small-img {
+            width: 150px;
+            transition: width 0.3s ease;
+        }
+
+        .full-img {
+            width: 100%;
+            transition: width 0.3s ease;
+        }
+    </style>
+    <title>Image Toggle</title>
+</head>
+
+<body>
+    <div>
+        <img src="https://envs.sh/TIp.png" alt="Example Image" class="small-img" id="toggleImage">
+    </div>
+
+    <script>
+        const img = document.getElementById('toggleImage');
+
+        img.addEventListener('click', function () {
+            img.classList.toggle('full-img');
+            img.classList.toggle('small-img');
+        });
+    </script>
+</body>
+
+</html>

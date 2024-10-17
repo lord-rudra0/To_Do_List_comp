@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beating Heart Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0f7fa;
+            /* Light blue background */
+        }
+
+        #heart {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+            margin: 0 auto;
+            position: relative;
+            transform: rotate(45deg);
+            animation: beat 0.5s linear infinite alternate;
+            box-shadow: 0 0 40px rgba(213, 9, 60, 1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            /* Text color */
+            font-size: 24px;
+            /* Text size */
+            font-family: Arial, sans-serif;
+            /* Font family */
+            text-align: center;
+            /* Center text alignment */
+        }
+
+        #heart:after {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: absolute;
+            content: "";
+            top: 0;
+            left: -150px;
+            background-color: red;
+            box-shadow: 0 0 40px rgba(213, 9, 60, 1);
+            animation: pulse 0.5s linear infinite alternate;
+        }
+
+        #heart:before {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: absolute;
+            content: "";
+            top: -150px;
+            right: 0;
+            background-color: red;
+            box-shadow: 0 0 40px rgba(213, 9, 60, 1);
+            animation: pulse 0.5s linear infinite alternate;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: scale(1, 1) rotate(45deg);
+                box-shadow: 0 0 40px rgba(213, 9, 60, 1);
+            }
+
+            100% {
+                transform: scale(1.1, 1.1) rotate(45deg);
+                box-shadow: 0 0 40px rgba(213, 9, 60, 0.6);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 40px rgba(213, 9, 60, 1);
+            }
+
+            100% {
+                box-shadow: 0 0 40px rgba(213, 9, 60, 0.6);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="heart">
+        <div>Your Name</div> <!-- Replace with your desired name -->
+    </div>
+</body>
+
+</html>

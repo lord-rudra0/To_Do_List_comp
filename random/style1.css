@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    background-color: #1c1b1b;
+}
+
+#head {
+    font-family: Cambria, Cochin, 'Times New Roman', serif;
+    background: linear-gradient(to left, rgb(120, 120, 202), rgb(17, 163, 177));
+    text-align: center;
+    padding: 5px;
+    border-radius: 18px;
+    justify-content: center;
+    width: 90%;
+
+
+}
+
+#abc {
+    color: rgb(53, 44, 44);
+}
+
+#entery {
+    margin: 15px;
+    border-radius: 20px;
+    text-align: auto;
+    background: linear-gradient(to left, rgb(120, 120, 202), rgb(17, 163, 177))
+}
+
+.navbar {
+    padding: 1px;
+    box-sizing: border-box;
+    box-shadow: 30px;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    display: flex;
+
+
+}
+
+label {
+    padding: 10px;
+}
+
+.assembly {
+    padding: 10px;
+    margin: 1px;
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+#textarea1 {
+    flex: 1;
+    border-radius: 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px;
+    height: 100px;
+}
+
+#textarea2 {
+    flex: 1;
+    border-radius: 10px;
+    height: 100px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 4px;
+}
+
+#textarea1:hover {
+    background-color: rgb(212, 212, 212);
+    box-shadow: 8px 12px 15px;
+}
+
+#textarea2:hover {
+    background-color: rgb(216, 209, 209);
+    box-shadow: 8px 12px 15px;
+}
+
+.buttonfirst {
+    margin: 10px;
+    padding: 10px;
+
+}
+
+#button1 {
+    width: 60px;
+    height: 25px;
+    border-radius: 10px;
+    background-color: aliceblue;
+}
+
+#button1:hover {
+    box-shadow: 0px 2px 4px;
+    ;
+}
+
+#name {
+    height: auto;
+    width: auto;
+    padding: 10px;
+    border-radius: 18px;
+    background-color: #1c1b1b;
+    margin: auto;
+}
+
+#abc {
+    color: rgb(175, 165, 153);
+}
