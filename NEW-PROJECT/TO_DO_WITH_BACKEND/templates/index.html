@@ -142,6 +142,7 @@
             <th scope="col">Time</th>
             <th scope="col">Due Date</th>
             <th scope="col">Remark</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -151,6 +152,26 @@
             <td>{{todo.title}}</td>
             <td>{{todo.description}}</td>
             <td>{{todo.time}}</td>
+            <td>{{todo.due_date}}</td>
+            <td>
+              {%if todo.status == 0%}
+              <button type="button" class="btn btn-outline-success">
+                Done
+              </button>
+              {%else%}
+              <button type="button" class="btn btn-outline-danger">
+                Pending
+              </button>
+              {%endif%}
+            </td>
+            <td>
+              <button type="button" class="btn btn-outline-warning">
+                Update
+              </button>
+              <button type="button" class="btn btn-outline-danger">
+                Delete
+              </button>
+            </td>
           </tr>
           {%endfor%}
         </tbody>

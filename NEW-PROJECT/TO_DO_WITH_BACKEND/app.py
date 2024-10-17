@@ -15,16 +15,24 @@ class ToDo(db.Model):
     title=db.Column(db.String(500),nullable=False)
     description=db.Column(db.String(100))
     time = db.Column(db.DateTime, default=datetime.utcnow)
+    due_date = db.Column(db.DateTime)
     
     def __repr__(self):
-        return f"{self.id} - {self.title} - {self.description} - {self.time}"
+        return f"{self.id} - {self.title} - {self.description} - {self.time} - {self.due_date}"
     
 @app.route('/',methods=['GET','POST'])
 def home():
     if request.method == 'POST':
         title = request.form['title']
         description = request.form['description']
-        todo = ToDo(title=title,description=description)
+        due_date = request.form['due_date']
+        
+        if due_date:
+            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+        else:
+            due_date = None
+        
+        todo = ToDo(title=title,description=description ,due_date=due_date)
         db.session.add(todo)
         db.session.commit()
         return redirect(url_for('home'))
