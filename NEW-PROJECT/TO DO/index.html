@@ -1,78 +1,104 @@
+<!-- Got it! Here’s a brief overview of the backend concepts for a To-Do list application without code:
+
+### 1. Data Management
+- **Database**: You’ll need a database to store tasks, which can include details like title, description, due date, status, and timestamps. Common choices are SQL databases (like MySQL or PostgreSQL) or NoSQL databases (like MongoDB).
+
+### 2. API and Business Logic
+- **Endpoints**: The backend will expose various endpoints to handle tasks, such as creating, retrieving, updating, and deleting tasks.
+- **Business Logic**: This includes validation of task data, managing task status (like marking as completed), and filtering tasks based on user preferences.
+
+### 3. User Authentication
+- **User Accounts**: If you want users to have personalized experiences, you'll need a system for managing user accounts.
+- **Authentication**: Implement a method to verify user identity, such as tokens or session management.
+
+### 4. Task Management
+- **Validations**: Ensure that the input for tasks is correct (e.g., a title should not be empty).
+- **Sorting and Filtering**: Provide functionality to sort tasks (by date, priority) and filter them (completed vs. pending).
+
+### 5. Data Interaction
+- **CRUD Operations**: The backend will need to handle Create, Read, Update, and Delete operations for tasks, allowing users to manage their lists effectively.
+
+This framework provides a solid foundation for developing the backend of a To-Do list application, focusing on data management, user interaction, and business logic. -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
-    <link rel="stylesheet" href="pagestyle.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <div class=" main">
-        <div class="container">
-            <nav class="navbar">My To-Do List</nav>
-        </div>
-
-        <div class="container">
-            <div class="input-section">
-                <textarea id="task" placeholder="Enter a task..."></textarea>
-                <button id="add" onclick="addTask()">Add Task</button>
-            </div>
-        </div>
-
-        <div class="tasklist container">
-            <div id="newtask">
-                <h2>New Task List</h2>
-                <div id="list1"></div>
-                <div id="existingTaskCount">Total New Tasks: 0</div>
-                <div id="totalTaskCountEver">Total Tasks Ever Added: 0</div>
-            </div>
-
-            <div id="endlist">
-                <h2>Completed Task List</h2>
-                <div id="list2"></div>
-                <div id="completedTaskCount">Total Completed Tasks: 0</div>
-                <div id="totalTaskCompletedEver">Total Tasks Ever Completed: 0</div>
-                <button onclick="clearCompleted()">Clear All Completed Tasks</button>
-            </div>
-        </div>
-
+  <div class="main">
+    <div class="container">
+      <nav class="navbar">My To-Do List</nav>
     </div>
-    <div>
-        <footer class="footer" style="color: aqua; margin: 10px;">Made by Me</footer>
 
+    <div class="container">
+      <div class="input-section">
+        <textarea id="task" placeholder="Enter a task..."></textarea>
+        <button id="add" onclick="addTask()">Add Task</button>
+      </div>
     </div>
-    <script>
-        let taskIdCounter = localStorage.getItem("taskIdCounter") || 0,
-            currentEditingTaskId = null,
-            totalTasksEverAdded = localStorage.getItem("totalTasksEverAdded") || 0,
-            totalTasksEverCompleted = localStorage.getItem("totalTasksEverCompleted") || 0;
 
-        function addTask() {
-            const taskInput = document.getElementById("task").value.trim();
-            if (!taskInput) return alert("Please enter a task!");
+    <div class="tasklist container">
+      <div id="newtask">
+        <h2>New Task List</h2>
+        <div id="list1"></div>
+        <div id="existingTaskCount">Total New Tasks: 0</div>
+        <div id="totalTaskCountEver">Total Tasks Ever Added: 0</div>
+      </div>
 
-            currentEditingTaskId ? updateTask(currentEditingTaskId, taskInput) : createNewTask(taskInput);
-            document.getElementById("task").value = ""; 
-            saveTasks();
-            updateTaskCounts();
-        }
+      <div id="endlist">
+        <h2>Completed Task List</h2>
+        <div id="list2"></div>
+        <div id="completedTaskCount">Total Completed Tasks: 0</div>
+        <div id="totalTaskCompletedEver">Total Tasks Ever Completed: 0</div>
+        <button onclick="clearCompleted()">Clear All Completed Tasks</button>
+      </div>
+    </div>
+  </div>
+  <div>
+    <footer class="footer" style="color: aqua; margin: 10px">
+      Made by <a href="https://my-portfolio-wine-one-81.vercel.app/">Me</a>
+    </footer>
+  </div>
+  <script>
+    let taskIdCounter = localStorage.getItem("taskIdCounter") || 0,
+      currentEditingTaskId = null,
+      totalTasksEverAdded = localStorage.getItem("totalTasksEverAdded") || 0,
+      totalTasksEverCompleted =
+        localStorage.getItem("totalTasksEverCompleted") || 0;
 
-        function createNewTask(taskInput) {
-            const taskId = `task-${++taskIdCounter}`;
-            createTaskElement(taskId, taskInput, false);
-            totalTasksEverAdded++;
-            localStorage.setItem("totalTasksEverAdded", totalTasksEverAdded);
-        }
+    function addTask() {
+      const taskInput = document.getElementById("task").value.trim();
+      if (!taskInput) return alert("Please enter a task!");
 
-        function createTaskElement(taskId, taskText, isCompleted) {
-            const taskBox = document.createElement("div"),
-                taskNumber = isCompleted ? getCompletedTaskCount() + 1 : getNewTaskCount() + 1;
+      currentEditingTaskId
+        ? updateTask(currentEditingTaskId, taskInput)
+        : createNewTask(taskInput);
+      document.getElementById("task").value = "";
+      saveTasks();
+      updateTaskCounts();
+    }
 
-            taskBox.className = "task-box";
-            taskBox.id = taskId;
-            taskBox.innerHTML = `
+    function createNewTask(taskInput) {
+      const taskId = `task-${++taskIdCounter}`;
+      createTaskElement(taskId, taskInput, false);
+      totalTasksEverAdded++;
+      localStorage.setItem("totalTasksEverAdded", totalTasksEverAdded);
+    }
+
+    function createTaskElement(taskId, taskText, isCompleted) {
+      const taskBox = document.createElement("div"),
+        taskNumber = isCompleted
+          ? getCompletedTaskCount() + 1
+          : getNewTaskCount() + 1;
+
+      taskBox.className = "task-box";
+      taskBox.id = taskId;
+      taskBox.innerHTML = `
                 <span>${taskNumber}. ${taskText}</span>
                 <div class="task-buttons">
                     <button onclick="markAsComplete('${taskId}')">Complete</button>
@@ -80,94 +106,133 @@
                     <button onclick="deleteTask('${taskId}')">Delete</button>
                 </div>
             `;
-            document.getElementById(isCompleted ? "list2" : "list1").appendChild(taskBox);
-            updateTaskCounts();
-        }
+      document
+        .getElementById(isCompleted ? "list2" : "list1")
+        .appendChild(taskBox);
+      updateTaskCounts();
+    }
 
-        function markAsComplete(taskId) {
-            const taskBox = document.getElementById(taskId);
-            taskBox.querySelector("span").classList.add("completed");
-            document.getElementById("list2").appendChild(taskBox);
-            totalTasksEverCompleted++;
-            localStorage.setItem("totalTasksEverCompleted", totalTasksEverCompleted);
-            saveTasks();
-            updateTaskCounts();
-        }
+    function markAsComplete(taskId) {
+      const taskBox = document.getElementById(taskId);
+      taskBox.querySelector("span").classList.add("completed");
+      document.getElementById("list2").appendChild(taskBox);
+      totalTasksEverCompleted++;
+      localStorage.setItem(
+        "totalTasksEverCompleted",
+        totalTasksEverCompleted
+      );
+      saveTasks();
+      updateTaskCounts();
+    }
 
-        function editTask(taskId, taskText) {
-            currentEditingTaskId = taskId;
-            document.getElementById("task").value = taskText;
-        }
+    function editTask(taskId, taskText) {
+      currentEditingTaskId = taskId;
+      document.getElementById("task").value = taskText;
+    }
 
-        function updateTask(taskId, newText) {
-            const taskBox = document.getElementById(taskId),
-                taskNumber = taskBox.querySelector("span").classList.contains("completed") ? getCompletedTaskCount() + 1 : getNewTaskCount() + 1;
+    function updateTask(taskId, newText) {
+      const taskBox = document.getElementById(taskId),
+        taskNumber = taskBox
+          .querySelector("span")
+          .classList.contains("completed")
+          ? getCompletedTaskCount() + 1
+          : getNewTaskCount() + 1;
 
-            taskBox.querySelector("span").innerText = `${taskNumber}. ${newText}`;
-            currentEditingTaskId = null;
-            saveTasks();
-            updateTaskCounts();
-        }
+      taskBox.querySelector("span").innerText = `${taskNumber}. ${newText}`;
+      currentEditingTaskId = null;
+      saveTasks();
+      updateTaskCounts();
+    }
 
-        function deleteTask(taskId) {
-            document.getElementById(taskId).remove();
-            saveTasks();
-            updateTaskCounts();
-        }
+    function deleteTask(taskId) {
+      document.getElementById(taskId).remove();
+      saveTasks();
+      updateTaskCounts();
+    }
 
-        function clearCompleted() {
-            document.getElementById("list2").innerHTML = "";
-            saveTasks();
-            updateTaskCounts();
-        }
+    function clearCompleted() {
+      document.getElementById("list2").innerHTML = "";
+      saveTasks();
+      updateTaskCounts();
+    }
 
-        function getNewTaskCount() {
-            return document.getElementById("list1").children.length;
-        }
+    function getNewTaskCount() {
+      return document.getElementById("list1").children.length;
+    }
 
-        function getCompletedTaskCount() {
-            return document.getElementById("list2").children.length;
-        }
+    function getCompletedTaskCount() {
+      return document.getElementById("list2").children.length;
+    }
 
-        function updateTaskCounts() {
-            document.getElementById("existingTaskCount").innerText = `Total New Tasks: ${getNewTaskCount()}`;
-            document.getElementById("completedTaskCount").innerText = `Total Completed Tasks: ${getCompletedTaskCount()}`;
-            document.getElementById("totalTaskCountEver").innerText = `Total Tasks Ever Added: ${totalTasksEverAdded}`;
-            document.getElementById("totalTaskCompletedEver").innerText = `Total Tasks Ever Completed: ${totalTasksEverCompleted}`;
-            updateTaskNumbering("list1");
-            updateTaskNumbering("list2");
-        }
+    function updateTaskCounts() {
+      document.getElementById(
+        "existingTaskCount"
+      ).innerText = `Total New Tasks: ${getNewTaskCount()}`;
+      document.getElementById(
+        "completedTaskCount"
+      ).innerText = `Total Completed Tasks: ${getCompletedTaskCount()}`;
+      document.getElementById(
+        "totalTaskCountEver"
+      ).innerText = `Total Tasks Ever Added: ${totalTasksEverAdded}`;
+      document.getElementById(
+        "totalTaskCompletedEver"
+      ).innerText = `Total Tasks Ever Completed: ${totalTasksEverCompleted}`;
+      updateTaskNumbering("list1");
+      updateTaskNumbering("list2");
+    }
 
-        function updateTaskNumbering(listId) {
-            const tasks = document.getElementById(listId).children;
-            for (let i = 0; i < tasks.length; i++) {
-                tasks[i].querySelector("span").innerText = `${i + 1}. ${tasks[i].querySelector("span").innerText.split('. ')[1]}`;
-            }
-        }
+    function updateTaskNumbering(listId) {
+      const tasks = document.getElementById(listId).children;
+      for (let i = 0; i < tasks.length; i++) {
+        tasks[i].querySelector("span").innerText = `${i + 1}. ${tasks[i].querySelector("span").innerText.split(". ")[1]
+          }`;
+      }
+    }
 
-        function saveTasks() {
-            const newTasks = Array.from(document.getElementById("list1").children).map(task => ({ id: task.id, text: task.querySelector("span").innerText.split('. ')[1], completed: false })),
-                completedTasks = Array.from(document.getElementById("list2").children).map(task => ({ id: task.id, text: task.querySelector("span").innerText.split('. ')[1], completed: true }));
+    function saveTasks() {
+      const newTasks = Array.from(
+        document.getElementById("list1").children
+      ).map((task) => ({
+        id: task.id,
+        text: task.querySelector("span").innerText.split(". ")[1],
+        completed: false,
+      })),
+        completedTasks = Array.from(
+          document.getElementById("list2").children
+        ).map((task) => ({
+          id: task.id,
+          text: task.querySelector("span").innerText.split(". ")[1],
+          completed: true,
+        }));
 
-            localStorage.setItem("newTasks", JSON.stringify(newTasks));
-            localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-            localStorage.setItem("taskIdCounter", taskIdCounter);
-        }
+      localStorage.setItem("newTasks", JSON.stringify(newTasks));
+      localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+      localStorage.setItem("taskIdCounter", taskIdCounter);
+    }
 
-        function loadTasks() {
-            const newTasks = JSON.parse(localStorage.getItem("newTasks")) || [],
-                completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+    function loadTasks() {
+      const newTasks = JSON.parse(localStorage.getItem("newTasks")) || [],
+        completedTasks =
+          JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-            newTasks.forEach(task => createTaskElement(task.id, task.text, task.completed));
-            completedTasks.forEach(task => createTaskElement(task.id, task.text, task.completed));
-            taskIdCounter = Math.max(taskIdCounter, newTasks.length + completedTasks.length);
-            totalTasksEverAdded = localStorage.getItem("totalTasksEverAdded") || 0;
-            totalTasksEverCompleted = localStorage.getItem("totalTasksEverCompleted") || 0;
-            updateTaskCounts();
-        }
+      newTasks.forEach((task) =>
+        createTaskElement(task.id, task.text, task.completed)
+      );
+      completedTasks.forEach((task) =>
+        createTaskElement(task.id, task.text, task.completed)
+      );
+      taskIdCounter = Math.max(
+        taskIdCounter,
+        newTasks.length + completedTasks.length
+      );
+      totalTasksEverAdded = localStorage.getItem("totalTasksEverAdded") || 0;
+      totalTasksEverCompleted =
+        localStorage.getItem("totalTasksEverCompleted") || 0;
+      updateTaskCounts();
+    }
 
-        window.onload = loadTasks;
-    </script>
+    window.onload = loadTasks;
+  </script>
 </body>
 
 </html>
