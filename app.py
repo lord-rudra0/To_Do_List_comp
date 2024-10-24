@@ -42,6 +42,30 @@ def home():
 # todo = ToDo(title="First Task",description="This is the first task")
     # db.session.add(todo)
     # db.session.commit()
+    
+@app.route('/delete/<int:id>')
+def delete(id):
+    todo = ToDo.query.filter_by(id=id).first()
+    db.session.delete(todo)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+@app.route('/update/<int:id>',methods=['GET','POST'])
+def update(id):
+    if request.method == 'POST':
+        title = request.form['title']
+        description = request.form['description']
+        due_date = request.form['due_date']
+        
+        todo = ToDo.query.filter_by(id=id).first()
+        todo.title = title
+        todo.description = description
+        todo.due_date = due_date
+  
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('update.html',todo=todo)
+    
 @app.route('/add')
 def add():
     all_todo = ToDo.query.all()
