@@ -1,0 +1,53 @@
+{% extends 'base.html'%} {% block title %} Update {% endblock %} {% block body
+%}
+
+<h1>Update Your To-Do List</h1>
+<div class="container background_div">
+  <div class="container mt-4S">
+    <form action="/" method="POST">
+      <div class="duedate mb-3">
+        <div class="titleclass container">
+          <label for="text1" class="form-label"
+            >Add the title for To-Do List</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            value="{{todo.title}}"
+            name="title"
+            id="text1"
+          />
+        </div>
+
+        <div class="dateclass container">
+          <label for="due_date" class="form-label"
+            >Add due date for To-Do List</label
+          >
+          <input
+            type="date"
+            class="form-control"
+            name="due_date"
+            id="due_date"
+            value="{{todo.due_date}}"
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="text2" class="form-label">To-Do Description</label>
+        <textarea
+          class="form-control"
+          value="{{todo.description}}"
+          name="description"
+          id="text2"
+          rows="4"
+          required
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="margin-bottom: 20px">
+        Update
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}
