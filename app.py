@@ -60,10 +60,15 @@ def update(id):
         todo = ToDo.query.filter_by(id=id).first()
         todo.title = title
         todo.description = description
-        todo.due_date = due_date
-  
+        if due_date:
+            due_date = datetime.strptime(due_date, '%Y-%m-%d').date()
+            todo.due_date = due_date
+        else:
+            todo.due_date = None
+        db.session.add(todo)
         db.session.commit()
         return redirect(url_for('home'))
+    todo = ToDo.query.filter_by(id=id).first()
     return render_template('update.html',todo=todo)
     
 @app.route('/add')
@@ -74,5 +79,6 @@ def add():
     
 
 if __name__ == '__main__':
+    
     #db.create_all()
     app.run(debug=True)

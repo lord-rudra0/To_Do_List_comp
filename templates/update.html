@@ -4,7 +4,7 @@
 <h1>Update Your To-Do List</h1>
 <div class="container background_div">
   <div class="container mt-4S">
-    <form action="/" method="POST">
+    <form action="/update/{{todo.id}}" method="POST">
       <div class="duedate mb-3">
         <div class="titleclass container">
           <label for="text1" class="form-label"
@@ -28,7 +28,7 @@
             class="form-control"
             name="due_date"
             id="due_date"
-            value="{{todo.due_date}}"
+            value="{{todo.due_date.strftime('%Y-%m-%d') if todo.due_date else ''}}"
           />
         </div>
       </div>
@@ -42,7 +42,10 @@
           id="text2"
           rows="4"
           required
-        ></textarea>
+        >
+            {{todo.description}}
+    </textarea
+        >
       </div>
       <button type="submit" class="btn btn-primary" style="margin-bottom: 20px">
         Update
